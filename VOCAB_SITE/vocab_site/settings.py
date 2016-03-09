@@ -82,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'vocab',
-        'USER': 'vsadmin',
+        'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '',
@@ -146,14 +146,14 @@ LOGGING = {
             'maxBytes': 1024*1024*5, # 5 MB
             'backupCount': 5,
             'formatter':'standard',
-        },  
+        },
         'request_handler': {
                 'level':'DEBUG',
                 'class':'logging.handlers.RotatingFileHandler',
                 'filename': REQUEST_HANDLER_LOG_DIR,
                 'maxBytes': 1024*1024*5, # 5 MB
                 'backupCount': 5,
-                'formatter':'standard',      
+                'formatter':'standard',
         },
     },
     'loggers': {

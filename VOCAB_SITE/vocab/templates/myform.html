@@ -1,0 +1,34 @@
+{% extends "master.html" %}
+{% block content %}
+
+<form action={% url 'myform' %} method='post'>
+    {% csrf_token %}
+    {{ formset.management_form}}
+    {% for form in formset %}
+    <div class="forms">
+        <div id="form-{{ forloop.counter0 }}">
+          {{ form }}
+        </div>
+    </div>
+    {% endfor %}
+    <input type='submit' value='submit'/>
+    <button id="add-form">add form</button>
+</form>
+<a href="{% url 'home' %}">home</a>
+{% endblock content %}
+
+{% block extra_js %}
+<script type="text/html" id="formtemplate">
+    <div id="form-__prefix__">
+      {{ formset.empty_form }}
+    </div>
+</script>
+<script>
+    $('#add-form').click(function(ev){
+        ev.preventDefault();
+        var count = $('.forms').children().length;
+        $('div.forms').append($('#formtemplate').html().replace(new RegExp('__prefix__', 'g'), count)); // prefixes are 0 based
+        $('#id_form-TOTAL_FORMS').attr('value', count+1); // total forms is 1 based
+    });
+</script>
+{% endblock extra_js %}
